@@ -9,8 +9,22 @@
     <script xmlns="http://www.w3.org/1999/xhtml" src="/public/js/rss.js"></script>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[想法，随笔，思考，感叹，瞬间，笔记...]]></description>
-    <pubDate>Tue Sep 27 2016 09:46:51 GMT+0800 (CST)</pubDate>
+    <pubDate>Mon Oct 17 2016 11:14:33 GMT+0800 (CST)</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[揭秘 0.1 + 0.2 != 0.3]]></title>
+      <link>http://www.barretlee.com/blog/2016/09/28/ieee754-operation-in-js/</link>
+      <guid>http://www.barretlee.com/blog/2016/09/28/ieee754-operation-in-js/</guid>
+      <pubDate>Wed Sep 28 2016 23:05:23 GMT+0800 (CST)</pubDate>
+      <description>
+      <![CDATA[在采用 IEEE754 浮点数标准的语言中，0.1 + 0.2 都不会等于 0.3，但是 0.2 + 0.3 却等于 0.5，这是为何？想必这类问题也困扰着不少程序员。]]>
+      
+      </description>
+      <content:encoded><![CDATA[在采用 IEEE754 浮点数标准的语言中，0.1 + 0.2 都不会等于 0.3，但是 0.2 + 0.3 却等于 0.5，这是为何？想必这类问题也困扰着不少程序员。]]>
+      </content:encoded>
+      <comments>http://www.barretlee.com/blog/2016/09/28/ieee754-operation-in-js/#comments</comments>
+    </item>
     
     <item>
       <title><![CDATA[如何做好一名实习生]]></title>
@@ -416,20 +430,6 @@
       <content:encoded><![CDATA[很多人以为盲人就是拿着一根拐杖，四处探路，等着被人帮助。你可能还不知道，很多盲人都在使用电脑和手机，并且也会做股票、在淘宝开店等，当然，他们用的很痛苦。技术本可以让视障人士同我们一样，自由穿梭在互联网的每个角落，而这个互联网的搭建者们，似乎还没有意识到，有这么一个群里，期待被我们关注，期待我们把信息无障碍植入到网络中。]]>
       </content:encoded>
       <comments>http://www.barretlee.com/blog/2016/02/28/step-in-aria/#comments</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[谈一谈博客的著作版权问题]]></title>
-      <link>http://www.barretlee.com/blog/2016/02/27/about-cc/</link>
-      <guid>http://www.barretlee.com/blog/2016/02/27/about-cc/</guid>
-      <pubDate>Sat Feb 27 2016 23:19:00 GMT+0800 (CST)</pubDate>
-      <description>
-      <![CDATA[大家都知道，技术内容是在不断革新的，上半年还在流行的东西，下半年可能就已经淹没在历史洪流之中。博客文章中的表述可能存在诸多错误或者一段时间后内容过时了，当作者发现这些错误的时候，便会对内容做修改，copy 方式的转载最大的问题就是没法即时与原文保持同步，倘若转载时还不保留原文地址，信息的传递就会出现断层，一些错误的表述和内容，容易对刚入门的新人造成负面的刻板印象，这一点是需要各位朋友在转载文章的时候注意的！]]>
-      
-      </description>
-      <content:encoded><![CDATA[大家都知道，技术内容是在不断革新的，上半年还在流行的东西，下半年可能就已经淹没在历史洪流之中。博客文章中的表述可能存在诸多错误或者一段时间后内容过时了，当作者发现这些错误的时候，便会对内容做修改，copy 方式的转载最大的问题就是没法即时与原文保持同步，倘若转载时还不保留原文地址，信息的传递就会出现断层，一些错误的表述和内容，容易对刚入门的新人造成负面的刻板印象，这一点是需要各位朋友在转载文章的时候注意的！]]>
-      </content:encoded>
-      <comments>http://www.barretlee.com/blog/2016/02/27/about-cc/#comments</comments>
     </item>
     
   </channel>
