@@ -9,8 +9,22 @@
     <script xmlns="http://www.w3.org/1999/xhtml" src="/public/js/rss.js"></script>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[想法，随笔，思考，感叹，瞬间，笔记...]]></description>
-    <pubDate>Mon Oct 17 2016 11:14:33 GMT+0800 (CST)</pubDate>
+    <pubDate>Fri Oct 21 2016 03:23:37 GMT+0800 (CST)</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[谈一谈我在阿里的成长]]></title>
+      <link>http://www.barretlee.com/blog/2016/10/21/my-growth-at-alibaba/</link>
+      <guid>http://www.barretlee.com/blog/2016/10/21/my-growth-at-alibaba/</guid>
+      <pubDate>Fri Oct 21 2016 03:22:50 GMT+0800 (CST)</pubDate>
+      <description>
+      <![CDATA[昨天受阿里通信的同事邀请，分享了一个关于成长的话题。其实我不太热衷于分享此类话题，作为一个技术人，分享那些没有技术干货的内容总感觉有些怪怪的，无奈，还是拟下了这个话题——《谈一谈我在阿里的成长》，所以本文主要是分享的 PPT 简述。]]>
+      
+      </description>
+      <content:encoded><![CDATA[昨天受阿里通信的同事邀请，分享了一个关于成长的话题。其实我不太热衷于分享此类话题，作为一个技术人，分享那些没有技术干货的内容总感觉有些怪怪的，无奈，还是拟下了这个话题——《谈一谈我在阿里的成长》，所以本文主要是分享的 PPT 简述。]]>
+      </content:encoded>
+      <comments>http://www.barretlee.com/blog/2016/10/21/my-growth-at-alibaba/#comments</comments>
+    </item>
     
     <item>
       <title><![CDATA[揭秘 0.1 + 0.2 != 0.3]]></title>
@@ -416,20 +430,6 @@
       <content:encoded><![CDATA[网页无障碍相关的学习和研究已经坚持了好几个星期了，看了不少文档，也在 Google 中寻觅了不少博客文章，总的来说就一个感受：文档太细节太长，博客指导性不强。文本主要从网页无障碍的思路上做了一些阐述，可能不严谨，也可能有表述不当的地方，如果你对这方面有研究，欢迎提出你的观点，也期待更多人关注网页无障碍化。]]>
       </content:encoded>
       <comments>http://www.barretlee.com/blog/2016/03/05/steps-of-web-content-accessibility/#comments</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[信息无障碍不是献爱心更不是做公益慈善]]></title>
-      <link>http://www.barretlee.com/blog/2016/02/28/step-in-aria/</link>
-      <guid>http://www.barretlee.com/blog/2016/02/28/step-in-aria/</guid>
-      <pubDate>Sun Feb 28 2016 23:20:42 GMT+0800 (CST)</pubDate>
-      <description>
-      <![CDATA[很多人以为盲人就是拿着一根拐杖，四处探路，等着被人帮助。你可能还不知道，很多盲人都在使用电脑和手机，并且也会做股票、在淘宝开店等，当然，他们用的很痛苦。技术本可以让视障人士同我们一样，自由穿梭在互联网的每个角落，而这个互联网的搭建者们，似乎还没有意识到，有这么一个群里，期待被我们关注，期待我们把信息无障碍植入到网络中。]]>
-      
-      </description>
-      <content:encoded><![CDATA[很多人以为盲人就是拿着一根拐杖，四处探路，等着被人帮助。你可能还不知道，很多盲人都在使用电脑和手机，并且也会做股票、在淘宝开店等，当然，他们用的很痛苦。技术本可以让视障人士同我们一样，自由穿梭在互联网的每个角落，而这个互联网的搭建者们，似乎还没有意识到，有这么一个群里，期待被我们关注，期待我们把信息无障碍植入到网络中。]]>
-      </content:encoded>
-      <comments>http://www.barretlee.com/blog/2016/02/28/step-in-aria/#comments</comments>
     </item>
     
   </channel>
