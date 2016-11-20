@@ -20,7 +20,7 @@
   <link rel="shoticon" href="//www.barretlee.com/favicon.ico" type="image/x-icon">
   <link rel="alternate" type="application/rss+xml" href="//www.barretlee.com/rss2.xml" title="小胡子哥的个人网站" />
   <link rel="prev" href="//www.barretlee.com/blog/2015/04/24/cb-Thinking-in-FE-Quality/" title="对前端质量保障的思考" />
-  <link rel="next" href="//www.barretlee.com/blog/2015/04/13/xcode-select-error/" title="Xcode-select Error" />
+  <link rel="next" href="//www.barretlee.com/blog/2015/04/13/this-reference/" title="this的指向" />
   <link rel="start" href="//www.barretlee.com/entry/" title="Blog Entry" />
   <link rel="stylesheet" href="/public/css/style.css?v=20160728">
 </head>
@@ -77,11 +77,11 @@
 <li>xjs - Harmony</li>
 </ol>
 <p>使用 xjs 就可以运行 js 脚本，直接 Ctrl + B 可能会报错，说 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">not found file or fold `node`</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">not found file or fold `node`</div></pre></td></tr></table></figure>
 <p>云云的错误。我们的 node 一般安装在 <code>/usr/local/bin/node</code> 这个地方。而环境变量，如果没有修改的话应该是这些：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/bin:/usr/sbin/:/bin:/sbin</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">/usr/bin:/usr/sbin/:/bin:/sbin</div></pre></td></tr></table></figure>
 <p>你可以将 <code>/usr/local/bin/node</code> 加入到环境变量，也可以这样</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/bin/node /usr/bin/node</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/bin/node /usr/bin/node</div></pre></td></tr></table></figure>
 <p>OK，就这么愉快的搞定了，如果想以 harmony 方式运行，可以按下 <code>Ctrl+Shift+B</code>，选择 <code>xjs - Harmony</code> 就行了。</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2015/04/15/st3-node-build-system/">//www.barretlee.com/blog/2015/04/15/st3-node-build-system/</a></p>
@@ -148,9 +148,9 @@
     </a>
   
   
-    <a href="/blog/2015/04/13/xcode-select-error/" class="post-next">
+    <a href="/blog/2015/04/13/this-reference/" class="post-next">
       <span class="aria-readonly">下一篇文章</span>
-      <b>Xcode-select Error</b>
+      <b>this的指向</b>
       <i class="icon" tabindex="0" aria-hidden="true">&#xe602;</i>
     </a>
   
@@ -167,9 +167,9 @@
   </a>
   
   
-  <a href="/blog/2015/04/13/xcode-select-error/" class="next" title="Xcode-select Error">
+  <a href="/blog/2015/04/13/this-reference/" class="next" title="this的指向">
     <i class="icon">&#x261e;</i>
-    <b>Xcode-select Error</b>
+    <b>this的指向</b>
   </a>
   
 </div>
@@ -308,6 +308,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

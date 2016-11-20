@@ -71,13 +71,13 @@
         </div>
         <p>当我们在 chrome 浏览器中填写表单之后，如果表单中包含密码域，浏览器将会提示用户是否记住密码。一旦记住密码，即便这次填写的是错误的，下次登录时浏览器也会任性的给你自动填充信息。</p>
 <p>这是开发者不喜欢看到的，对用户来说，也是不太安全的，通过</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">document</span>.getElementById(<span class="string">"passwordInput"</span>).value)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">document</span>.getElementById(<span class="string">"passwordInput"</span>).value)</div></pre></td></tr></table></figure>
 <p>就能拿到密码明文。虽加强了体验，但削弱了安全性，也让有「强迫症」的程序员感到颇为不爽。</p>
 <p>当页面加载的时候直接将表单域设置为空，貌似是不起作用的。原因是，浏览器在页面加载到一定程度时（我也不知道是什么时机）从自己的数据库中挖出曾经保存的表单域，填充进去。</p>
 <p>有人想到使用定时器，检测表单是否存在数据，这样的操作费时费力，不提倡。</p>
 <p>可以考虑这个方案：</p>
 <p>每个 <code>input</code> 都有 <code>defaultValue</code> 属性，这是 DOM 初始化的时候给它加上的，判断</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">input.defaultValue == input.value  </span><br><span class="line"><span class="comment">// 如果相等则不处理，如果不相等则将 value 置为空</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">input.defaultValue == input.value  </div><div class="line"><span class="comment">// 如果相等则不处理，如果不相等则将 value 置为空</span></div></pre></td></tr></table></figure>
 <p>感觉是，是靠谱的！</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2015/03/31/autocomplete-in-browser/">//www.barretlee.com/blog/2015/03/31/autocomplete-in-browser/</a></p>
@@ -304,6 +304,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

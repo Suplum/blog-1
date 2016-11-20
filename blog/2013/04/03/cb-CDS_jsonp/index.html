@@ -77,26 +77,26 @@
 <p></p><h3>Prelude [前奏]</h3><p></p>
 <p>　　如果我们请求一个JSON数据：（SAE地址：<span><a href="http://qianduannotes.sinaapp.com/test/testData_1.json" target="_blank" rel="external">http://qianduannotes.sinaapp.com/test/testData_1.json</a></span>）</p>
 
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//一个简单的json数据</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"Barret Lee"</span>,</span><br><span class="line">    <span class="string">"sex"</span>    : <span class="string">"男"</span>,</span><br><span class="line">    <span class="string">"hobby"</span>: <span class="string">"女"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><div class="line"><span class="comment">//一个简单的json数据</span></div><div class="line">&#123;</div><div class="line">    <span class="string">"name"</span> : <span class="string">"Barret Lee"</span>,</div><div class="line">    <span class="string">"sex"</span>    : <span class="string">"男"</span>,</div><div class="line">    <span class="string">"hobby"</span>: <span class="string">"女"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>　　报个什么错，大家应该知道了吧~&nbsp;</p><br><blockquote><br><p><span>Origin<span><strong>&nbsp;null&nbsp;</strong></span>is not allowed by Access-Control-Allow-Origin</span></p><br></blockquote><br><p>　　先解释下这个null是个什么东东。很多人在测试的时候是在没有诸如apache、IIS环境下运行的程序，也就是在本地运行，此时origin就是null，所有<span>Access-Control-Allow-Origin这个东西不允许源null请求数据。当然如果你测试的时候在apache下运行，那这里的null就会变成你的IP了~</span></p>
 
 
 <p></p><h3><span>Then [接着]</span></h3><p></p>
 <p><span>　　JSONP，我们开始入题吧~&nbsp;</span></p><br><p><span>　　先说说后台返回个什么东西：（SAE地址：<span><a href="http://qianduannotes.sinaapp.com/test/CDS_jsonp.json" target="_blank" rel="external">http://qianduannotes.sinaapp.com/test/CDS_jsonp.json</a></span>）</span></p>
 
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    <span class="variable">$fun</span> = $_GET[<span class="string">"woo"</span>];  //先假设woo对应的是 trigger ；</span><br><span class="line">    <span class="variable">$ctt</span> = <span class="string">"Barret Lee"</span>;</span><br><span class="line">    echo <span class="variable">$fun</span> . <span class="string">"("</span> . <span class="variable">$ctt</span> . <span class="string">")"</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">    $fun = $_GET[<span class="string">"woo"</span>];  <span class="comment">//先假设woo对应的是 trigger ；</span></div><div class="line">    $ctt = <span class="string">"Barret Lee"</span>;</div><div class="line">    <span class="keyword">echo</span> $fun . <span class="string">"("</span> . $ctt . <span class="string">")"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <p>　　后台数据解析之后就是这样的：</p>
 
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">trigger</span><span class="params">(木子Vs立青)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="title">trigger</span><span class="params">(木子Vs立青)</span></span></div></pre></td></tr></table></figure>
 <p>　　有人就要开始惊叹了，肿么是 木子Vs立青&nbsp;，没有引号包住？？是的，没有引号，当$ctt是一个json数据的时候，我们得到的结果就是：</p>
 
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">trigger</span><span class="params">(JSON)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="title">trigger</span><span class="params">(JSON)</span></span></div></pre></td></tr></table></figure>
 <p>　　然后用一些熟知的方法来解析这些JSON（下次会讲解如何解析JSON）。</p><br><p>　　说了半天还是没讲客户端的操作，O(&cap;_&cap;)O~ &nbsp;不急不急。</p>
 
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://qianduannotes.sinaapp.com/test/CDS_jsonp.php?woo=trigger"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">trigger</span><span class="params">(obj)</span></span>&#123;　　　　<span class="comment">//注：这里只是随便写的一个函数，obj是为解析的。　　　　//obj = parse(obj);　　　　document.getElementById("container").innerHTML = obj;　　&#125;</span></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://qianduannotes.sinaapp.com/test/CDS_jsonp.php?woo=trigger"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">trigger</span><span class="params">(obj)</span></span>&#123;　　　　<span class="comment">//注：这里只是随便写的一个函数，obj是为解析的。　　　　//obj = parse(obj);　　　　document.getElementById("container").innerHTML = obj;　　&#125;</span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>　　习惯上jsonp请求时，会使用jsonp为参数，即<span>jsonp=trigger</span>，我觉得都无所谓啦，只要你用的爽就行。</p><br><p>　　如果你想传更多参数，那也是一样的：</p>
 
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://qianduannotes.sinaapp.com/test/CDS_jsonp.php?woo=trigger&lt;a=va&lt;b=vb&lt;c=vc"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://qianduannotes.sinaapp.com/test/CDS_jsonp.php?woo=trigger&lt;a=va&lt;b=vb&lt;c=vc"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p></p><h3>Attention [注意事项]</h3><p></p>
 <p>　　1.第一也是最重要的：JSONP不提供错误处理。如果动态插入的代码正常运行，你可以得到返回，但是如果失败了，那么什么都不会发生。你无法获得一个404的错误，也不能取消这个请求。</p><br><p>　　2.另外一个重要的缺点是如果使用了不信任的服务会造成很大的安全隐患。</p>
 
@@ -109,7 +109,7 @@
     </div>
     
 <div class="old-article-warning">
-	本文在 <b>1297</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
+	本文在 <b>1328</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
 	请在下方留言，或者联系 <a href="/about">小胡子哥</a>。
 </div>
 
@@ -332,6 +332,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

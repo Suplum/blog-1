@@ -71,7 +71,7 @@
         </div>
         <p>问题：textarea数据是数据库直接输出填充，请问如何做到自适应?</p>
 <p>回答：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tt = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"textarea"</span>).item(<span class="number">0</span>),</span><br><span class="line">    len = tt.value.length,</span><br><span class="line">    width = tt.clientWidth,</span><br><span class="line">    style = (<span class="built_in">window</span>.getComputedStyle</span><br><span class="line">                ||<span class="function"><span class="keyword">function</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">return</span> a.currentStyle&#125;)(tt, <span class="literal">null</span>),</span><br><span class="line">    fs = <span class="built_in">parseInt</span>(style[<span class="string">'font-size'</span>]) || <span class="number">12</span>,</span><br><span class="line">    lh = <span class="built_in">parseInt</span>(style[<span class="string">'line-height'</span>]) || fs * <span class="number">1.2</span>;</span><br><span class="line"></span><br><span class="line">tt.style.height = <span class="built_in">Math</span>.ceil(len / (width / fs)) * lh + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> tt = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"textarea"</span>).item(<span class="number">0</span>),</div><div class="line">    len = tt.value.length,</div><div class="line">    width = tt.clientWidth,</div><div class="line">    style = (<span class="built_in">window</span>.getComputedStyle</div><div class="line">                ||<span class="function"><span class="keyword">function</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">return</span> a.currentStyle&#125;)(tt, <span class="literal">null</span>),</div><div class="line">    fs = <span class="built_in">parseInt</span>(style[<span class="string">'font-size'</span>]) || <span class="number">12</span>,</div><div class="line">    lh = <span class="built_in">parseInt</span>(style[<span class="string">'line-height'</span>]) || fs * <span class="number">1.2</span>;</div><div class="line"></div><div class="line">tt.style.height = <span class="built_in">Math</span>.ceil(len / (width / fs)) * lh + <span class="string">"px"</span>;</div></pre></td></tr></table></figure>
 <p>这里需要注意的是：</p>
 <ul>
 <li>line-height 可能是 normal/inherit 之类的值，所以最好加上一个默认值</li>
@@ -79,9 +79,9 @@
 <li>防止计算误差，使用 Math.ceil 函数，比较靠谱的方式是 Math.ceil(len / (width / fs) - 1)，可以少一行~</li>
 </ul>
 <p>当然，最简单的方式莫过于：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tt.onpropertychange = tt.oninput = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.style.height = <span class="keyword">this</span>.scrollHeight;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">tt.onpropertychange = tt.oninput = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.style.height = <span class="keyword">this</span>.scrollHeight;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>虽然 css 也可以做到，但效果并不是很好：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="class">.tt</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow-x</span>:<span class="value"> hide</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow-y</span>:<span class="value"> visible</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.tt</span> &#123;</div><div class="line">    <span class="attribute">overflow-x</span>: hide;</div><div class="line">    <span class="attribute">overflow-y</span>: visible;</div><div class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>找个有 textarea 的页面，打开控制台，输入字符，验证下吧~</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2014/12/04/textarea-auto-height/">//www.barretlee.com/blog/2014/12/04/textarea-auto-height/</a></p>
@@ -308,6 +308,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

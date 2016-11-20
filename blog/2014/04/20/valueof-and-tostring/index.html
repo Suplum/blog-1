@@ -69,7 +69,7 @@
           <p>原文地址：<a href="//www.barretlee.com/blog/2014/04/20/valueof-and-tostring/">//www.barretlee.com/blog/2014/04/20/valueof-and-tostring/</a>，<a href="//www.barretlee.com/blog/2014/04/20/valueof-and-tostring/#comments">参与评论</a></p>
           <img src="//www.barretlee.com/blogimgs/avatar150.png">
         </div>
-        <figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"><span class="string">[]</span> == !<span class="string">[]</span> // true</span><br></pre></td></tr></table></figure>
+        <figure class="highlight accesslog"><table><tr><td class="code"><pre><div class="line"><span class="string">[]</span> == !<span class="string">[]</span> // true</div></pre></td></tr></table></figure>
 <p>其实这个问题没啥好讨论的，ECMA-262看看就知道了。不过很多人问，就做个笔记。</p>
 <p>前面那个 [] 在解析的时候调用的是 valueOf 返回的结果是 ‘’<br>后面那个取反运算，对 NAN undefined null “” 0 取反结果才会是true，所以 ![] 的结果是 false</p>
 <p>左边是 ‘’ ，右边是 false，答案是什么一目了然了。</p>
@@ -81,7 +81,7 @@
     </div>
     
 <div class="old-article-warning">
-	本文在 <b>916</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
+	本文在 <b>946</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
 	请在下方留言，或者联系 <a href="/about">小胡子哥</a>。
 </div>
 
@@ -304,6 +304,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

@@ -107,7 +107,7 @@
 <h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>可以通过几行正则，将 Markdown 转换的源码做小小的修改，部分换行符 <code>\n</code> 替换成 <code>&lt;br&gt;</code> 标签就行了。我的个人博客采用的是 hexo 构建的，它渲染出来的代码在换行处已经有了换行标签：</p>
 <p><img src="//ww1.sinaimg.cn/large/6c0378f8gw1f5sprhj1v5j214c0ziafp.jpg" alt="棒棒的代码效果"></p>
 <p>把博客代码直接粘贴过来的效果是：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">syntaxHighlighting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="number">33</span>;</span><br><span class="line">  <span class="keyword">var</span> s = <span class="string">"hello, こんにちは"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">syntaxHighlighting</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> n = <span class="number">33</span>;</div><div class="line">  <span class="keyword">var</span> s = <span class="string">"hello, こんにちは"</span>;</div><div class="line">  <span class="built_in">console</span>.log(s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>是不是感觉还不错？那么，写正则替换微信编辑器渲染源码，修复过滤换行符问题这么神圣的事情，就交给读者了！</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2016/07/14/codes-in-wechat/">//www.barretlee.com/blog/2016/07/14/codes-in-wechat/</a></p>
@@ -326,14 +326,15 @@
 			
 			<li>
 				<span><font aria-hidden="true">2016-04-28 »</font> </span>
-				<a href="/blog/2016/04/28/mini-query/">元素选择器 - Mini Query</a>
+				<a href="/blog/2016/04/28/javascript-performance-tester/">JavaScript 代码执行效率对比工具</a>
 				<span class="aria-readonly">发表时间为2016年04月28日</span>
-				<div><span class="aria-readonly">文章概要 </span>寥寥几行代码，实现一个简单的元素选择器，兼容低版本 IE。</div>
+				<div><span class="aria-readonly">文章概要 </span>平时写些小页面小程序，一般不会出现性能问题，但是在大的工程，或者在写一个框架、类库的时候，代码的性能就需要提高一个优先级了。测试代码的性能有多种方案：在 http://jsperf.com 上测试使用 console.time 来收集代码执行的时间console.time('Name');// code here...console.timeEnd('Name');自己写一个时间控制器</div>
 			</li>
 			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

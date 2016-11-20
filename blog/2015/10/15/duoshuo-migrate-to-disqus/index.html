@@ -83,12 +83,12 @@
 </ul>
 <h4 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h4><p><strong>第一步</strong></p>
 <p>进入到你的多说后台，导出多说数据</p>
-<figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/&#123;YOUR_DUOSHUO_NAME&#125;.duoshuo.com/admin</span><span class="regexp">/tools/export</span><span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line">http:<span class="regexp">//</span>&#123;YOUR_DUOSHUO_NAME&#125;.duoshuo.com<span class="regexp">/admin/</span>tools<span class="regexp">/export/</span></div></pre></td></tr></table></figure>
 <p><strong>第二步</strong></p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">//github</span>.com/barretlee/duoshuo-migrate-to-disqus.git</span><br><span class="line">cd duoshuo-migrate-to-disqus</span><br><span class="line">npm install</span><br><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">migrate</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">//github</span>.com/barretlee/duoshuo-migrate-to-disqus.git</div><div class="line">cd duoshuo-migrate-to-disqus</div><div class="line">npm install</div><div class="line"><span class="keyword">node</span> <span class="title">migrate</span></div></pre></td></tr></table></figure>
 <p><strong>第三步</strong></p>
 <p>进入你的 disqus 后台，将数据导入</p>
-<figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">/<span class="regexp">/&#123;YOUR_DISQUS_NAME&#125;.disqus.com/admin</span><span class="regexp">/discussions/import</span><span class="regexp">/platform/generic</span><span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line"><span class="regexp">//</span>&#123;YOUR_DISQUS_NAME&#125;.disqus.com<span class="regexp">/admin/</span>discussions<span class="regexp">/import/</span>platform<span class="regexp">/generic/</span></div></pre></td></tr></table></figure>
 <p>如果操作过程中遇到什么问题，可以在本文留言。</p>
 <p>如果导入到 disqus 无效，有可能是格式存在问题，或者某个字段的格式不对，这大多是因为多说导出的数据就不对。可以在 <code>disqus.ejs</code> 中加些判断，自己做过滤。</p>
 <p>多说这种自杀式的行为颇为可耻！</p>
@@ -317,6 +317,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

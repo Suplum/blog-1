@@ -72,7 +72,7 @@
         <p>unix/linux 下的命令太多了，花时间系统去学肯定十分枯燥，平时有需求用到某些命令的时候就会将这个命令所有的功能都看看，这次是为了关掉某个端口的进程，学习了下 lsof 和 kill 命令。</p>
 <a id="more"></a>
 <p>在 sublime 中配置了开启 node 的快捷方式，<code>Command + B</code> 可以直接执行正在编辑的 js 文件。多次由于操作不当，报错：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="tag">Error</span>: <span class="tag">listen</span> <span class="tag">EADDRINUSE</span></span><br><span class="line">    <span class="tag">at</span> <span class="tag">exports</span><span class="class">._errnoException</span> (<span class="tag">util</span><span class="class">.js</span><span class="pseudo">:746</span><span class="pseudo">:11)</span></span><br><span class="line">    <span class="tag">at</span> <span class="tag">Server</span><span class="class">._listen2</span> (<span class="tag">net</span><span class="class">.js</span><span class="pseudo">:1156</span><span class="pseudo">:14)</span></span><br><span class="line">    <span class="tag">at</span> <span class="tag">listen</span> (<span class="tag">net</span><span class="class">.js</span><span class="pseudo">:1182</span><span class="pseudo">:10)</span></span><br><span class="line">    <span class="tag">at</span> <span class="tag">Server</span><span class="class">.listen</span> (<span class="tag">net</span><span class="class">.js</span><span class="pseudo">:1267</span><span class="pseudo">:5)</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">Error</span>: <span class="selector-tag">listen</span> <span class="selector-tag">EADDRINUSE</span></div><div class="line">    <span class="selector-tag">at</span> <span class="selector-tag">exports</span><span class="selector-class">._errnoException</span> (<span class="selector-tag">util</span><span class="selector-class">.js</span><span class="selector-pseudo">:746</span><span class="selector-pseudo">:11)</span></div><div class="line">    <span class="selector-tag">at</span> <span class="selector-tag">Server</span><span class="selector-class">._listen2</span> (<span class="selector-tag">net</span><span class="selector-class">.js</span><span class="selector-pseudo">:1156</span><span class="selector-pseudo">:14)</span></div><div class="line">    <span class="selector-tag">at</span> <span class="selector-tag">listen</span> (<span class="selector-tag">net</span><span class="selector-class">.js</span><span class="selector-pseudo">:1182</span><span class="selector-pseudo">:10)</span></div><div class="line">    <span class="selector-tag">at</span> <span class="selector-tag">Server</span><span class="selector-class">.listen</span> (<span class="selector-tag">net</span><span class="selector-class">.js</span><span class="selector-pseudo">:1267</span><span class="selector-pseudo">:5)</span></div><div class="line">    ...</div></pre></td></tr></table></figure>
 <p>意思就是端口被占用 <code>EADDRINUSE</code>，即 “Error: Address in use”，这里为啥唤作 address 而不是 port 被占用，还是有说法的。</p>
 <p>在 linux/unix 下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。如 TCP/UDP 套接字，应用程序都会在系统目录下为期分配一个文件描述符，这个描述符就是程序和系统交互的接口。</p>
 <h3 id="lsof-命令"><a href="#lsof-命令" class="headerlink" title="lsof 命令"></a>lsof 命令</h3><p><code>lsof</code> 是 *nix 下常用的一个命令，全称为 “list open file”，列举被打开的文件描述符的相关信息，包括：</p>
@@ -85,7 +85,7 @@
 <li><code>-i</code> 端口号</li>
 </ul>
 <p>还有几个就不列举了，对一般用户来说并不常用。一次命令的执行，程序会吐出这些信息：</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">➜  blogsys ✗ lsof -i :<span class="number">4001</span></span><br><span class="line">COMMAND     PID      <span class="keyword">USER</span>   <span class="title">FD</span>   <span class="operator">TYPE</span> <span class="keyword">NODE</span><span class="identifier"> </span><span class="title">NAME</span></span><br><span class="line">Google    <span class="number">57881</span> barretlee  <span class="number">113</span>u  IPv4 TCP localhost:<span class="number">52445</span>-&gt;localhost:newoak (ESTABLISHED)</span><br><span class="line"><span class="keyword">node</span><span class="identifier">      </span><span class="title">68004</span> barretlee   <span class="number">11</span>u  IPv6 TCP *:newoak (LISTEN)</span><br><span class="line"><span class="keyword">node</span><span class="identifier">      </span><span class="title">68004</span> barretlee   <span class="number">18</span>u  IPv6 TCP localhost:newoak-&gt;localhost:<span class="number">52445</span> (ESTABLISHED)</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">➜  blogsys ✗ lsof -i :<span class="number">4001</span></div><div class="line">COMMAND     PID      <span class="keyword">USER</span>   <span class="title">FD</span>   <span class="keyword">TYPE</span> <span class="keyword">NODE</span> <span class="title">NAME</span></div><div class="line">Google    <span class="number">57881</span> barretlee  <span class="number">113</span>u  IPv4 TCP localhost:<span class="number">52445</span>-&gt;localhost:newoak (ESTABLISHED)</div><div class="line"><span class="keyword">node</span>      <span class="title">68004</span> barretlee   <span class="number">11</span>u  IPv6 TCP *:newoak (LISTEN)</div><div class="line"><span class="keyword">node</span>      <span class="title">68004</span> barretlee   <span class="number">18</span>u  IPv6 TCP localhost:newoak-&gt;localhost:<span class="number">52445</span> (ESTABLISHED)</div></pre></td></tr></table></figure>
 <p>中间还有一个 DEVICE 和 SIZE，被我删掉了。从上面可以看到包含如下信息：</p>
 <ul>
 <li>COMMAND 对应我们上面提到的 -c</li>
@@ -96,9 +96,9 @@
 </ul>
 <p>通过前面的参数，可以筛选被打开的文件。</p>
 <h3 id="关闭开启的端口"><a href="#关闭开启的端口" class="headerlink" title="关闭开启的端口"></a>关闭开启的端口</h3><p>通过 lsof 的端口查找参数找到 pid 或者 command：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsof -i :<span class="number">4001</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">lsof -i :4001</div></pre></td></tr></table></figure>
 <p>比如我们找到的 command 是 node， pid 为 73220，则可以通过下面的方式关闭端口：</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">kill -p <span class="number">73220</span></span><br><span class="line">pkill <span class="keyword">node</span><span class="identifier"></span><span class="title"></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">kill -p <span class="number">73220</span></div><div class="line">pkill <span class="keyword">node</span><span class="title"></span></div></pre></td></tr></table></figure>
 <p>另外还有 killall、xkill 等命令，可以阅读 <a href="http://www.thegeekstuff.com/2009/12/4-ways-to-kill-a-process-kill-killall-pkill-xkill/" target="_blank" rel="external">4 Ways to Kill a Process – kill, killall, pkill, xkil</a></p>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
 <li><a href="http://blog.csdn.net/guoguo1980/article/details/2324454" target="_blank" rel="external">linux lsof详解</a></li>
@@ -330,6 +330,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

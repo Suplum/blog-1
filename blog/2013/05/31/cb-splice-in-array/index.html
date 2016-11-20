@@ -73,16 +73,16 @@
 
 <p>在之前的<a title="Javascript综合应用小案例（续）" href="http://www.cnblogs.com/hustskyking/archive/2013/05/05/getKeywords-2.html" target="_blank">文章</a>中也介绍过类似的东西，主要操作的方式是利用splice这个便利函数。</p><br><p>我们要删除，Arr数组中的元素b，具体做法是：</p>
 
-<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一步是获取b在Arr中的位置</span></span><br><span class="line"><span class="keyword">var</span> <span class="keyword">index</span> = Arr.indexOf(b);</span><br><span class="line"><span class="comment">//第二步就是利用splice删除该元素</span></span><br><span class="line">Arr.splice(b, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight delphi"><table><tr><td class="code"><pre><div class="line"><span class="comment">//第一步是获取b在Arr中的位置</span></div><div class="line"><span class="keyword">var</span> <span class="keyword">index</span> = Arr.indexOf(b);</div><div class="line"><span class="comment">//第二步就是利用splice删除该元素</span></div><div class="line">Arr.splice(b, <span class="number">1</span>);</div></pre></td></tr></table></figure>
 <p>简单点写就是：</p>
 
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Arr.splice(Arr.indexOf(b), <span class="number">1</span>); <span class="comment">//这里的b可以是任意对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><div class="line">Arr.splice<span class="comment">(Arr.indexOf(b)</span>, <span class="number">1</span>); <span class="comment">//这里的b可以是任意对象</span></div></pre></td></tr></table></figure>
 <p><em>注：并非所有浏览器都支持indexOf这个函数，可能你需要自己写一个遍历函数获取到需要查询元素b的索引值。</em></p>
 
 
 <p>下面是我随便写的一个Array对象的扩展：</p>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.index = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>[i] === obj) <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Array</span>.prototype.del = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.splice(<span class="keyword">this</span>.indexOf(obj), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype.index = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++)&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>[i] === obj) <span class="keyword">return</span> i;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">Array</span>.prototype.del = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.splice(<span class="keyword">this</span>.indexOf(obj), <span class="number">1</span>);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>测试地址：<a title="DEMO" href="http://qianduannotes.sinaapp.com/test/splice/index.html" target="_blank">DEMO</a></p><br><p>&nbsp;. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.</p>
 
 
@@ -92,7 +92,7 @@
     </div>
     
 <div class="old-article-warning">
-	本文在 <b>1239</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
+	本文在 <b>1270</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
 	请在下方留言，或者联系 <a href="/about">小胡子哥</a>。
 </div>
 
@@ -315,6 +315,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

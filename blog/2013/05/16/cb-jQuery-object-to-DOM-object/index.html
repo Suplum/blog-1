@@ -73,27 +73,27 @@
 
 <p>刚开始学习jQuery时可能一时会分不清楚哪些是jQuery对象、哪些是DOM对象。至于DOM对象不多解释，我们接触的太多了，下面重点介绍一下jQuery，以及两者相互间的转换。</p><br><h3><strong>什么是jQuery对象？</strong></h3><br><p>—就是通过jQuery包装DOM对象后产生的对象。jQuery对象是jQuery独有的，其可以使用jQuery里的方法。</p><br><p>比如：</p>
 
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">$(<span class="string">"#test"</span>).<span class="function"><span class="title">html</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><div class="line"><span class="variable">$(</span><span class="string">"#test"</span>).html()</div></pre></td></tr></table></figure>
 <p>意思是指：获取ID为test的元素内的html代码。其中html()是jQuery里的方法</p><br><p>这段代码等同于用DOM实现代码：</p>
 
-<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"id"</span>).innerHTML;</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">document.getElementById(<span class="string">"id"</span>).innerHTML<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>虽然jQuery对象是包装DOM对象后产生的，但是jQuery无法使用DOM对象的任何方法，同理DOM对象也不能使用jQuery里的方法.乱使用会报错。比如：</p>
 
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">$(<span class="string">"#test"</span>)<span class="class">.innerHTML</span> <span class="comment">//错误写法</span></span><br><span class="line">document.<span class="function"><span class="title">getElementById</span><span class="params">(<span class="string">"id"</span>)</span></span>.<span class="function"><span class="title">html</span><span class="params">()</span></span>  <span class="comment">//错误写法</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">$(<span class="string">"#test"</span>).innerHTML <span class="comment">//错误写法</span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"id"</span>).html()  <span class="comment">//错误写法</span></div></pre></td></tr></table></figure>
 <p>还有一个要注意的是：用#id作为选择符取得的是jQuery对象与document.getElementById(“id”)得到的DOM对象，这两者并不等价。</p><br><p>jQuery对象与DOM对象也可以相互转换。在两者转换前首先我们给一个约定：如果一个获取的是 jQuery对象，那么我们在变量前面加上$，如：var $variab = jQuery对象；如果获取的是DOM对象，则与习惯普通一样：var variab = DOM对象；这么约定只是便于讲解与区别，实际使用中并不规定。</p>
 
 
 <p></p><h3><strong>jQuery对象转成DOM对象</strong></h3><p></p>
 <p>两种转换方式将一个jQuery对象转换成DOM对象：[index]和.get(index);</p><br><p><strong>(1)jQuery对象是一个数据对象，可以通过[index]的方法，来得到相应的DOM对象。</strong></p>
 
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">var <span class="variable">$v</span> =$(<span class="string">"#v"</span>) ; //jQuery对象</span><br><span class="line">var v=<span class="variable">$v</span>[<span class="number">0</span>]; //DOM对象</span><br><span class="line">alert(v.checked) //检测这个checkbox是否被选中</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> $v =$(<span class="string">"#v"</span>) ; <span class="comment">//jQuery对象</span></div><div class="line"><span class="keyword">var</span> v=$v[<span class="number">0</span>]; <span class="comment">//DOM对象</span></div><div class="line">alert(v.checked) <span class="comment">//检测这个checkbox是否被选中</span></div></pre></td></tr></table></figure>
 <p><strong>(2)jQuery本身提供，通过.get(index)方法，得到相应的DOM对象</strong></p>
 
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">var <span class="variable">$v</span>=$(<span class="string">"#v"</span>); //jQuery对象</span><br><span class="line">var v=<span class="variable">$v</span>.get(<span class="number">0</span>); //DOM对象</span><br><span class="line">alert(v.checked) //检测这个checkbox是否被选中</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="variable">$v</span>=$(<span class="string">"#v"</span>); <span class="comment">//jQuery对象</span></div><div class="line"><span class="keyword">var</span> v=<span class="variable">$v</span>.<span class="built_in">get</span>(0); <span class="comment">//DOM对象</span></div><div class="line">alert(v.checked) <span class="comment">//检测这个checkbox是否被选中</span></div></pre></td></tr></table></figure>
 <p></p><h3><strong>DOM对象转成jQuery对象</strong></h3><p></p>
 <p>对于已经是一个DOM对象，只需要用$()把DOM对象包装起来，就可以获得一个jQuery对象了。$(DOM对象)</p>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v=<span class="built_in">document</span>.getElementById(<span class="string">"v"</span>); <span class="comment">//DOM对象</span></span><br><span class="line"><span class="keyword">var</span> $v=$(v); <span class="comment">//jQuery对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> v=<span class="built_in">document</span>.getElementById(<span class="string">"v"</span>); <span class="comment">//DOM对象</span></div><div class="line"><span class="keyword">var</span> $v=$(v); <span class="comment">//jQuery对象</span></div></pre></td></tr></table></figure>
 <p>转换后，就可以任意使用jQuery的方法了。</p><br><p>通过以上方法，可以任意的相互转换jQuery对象和DOM对象。</p><br><p><span><em><span>注：DOM对象才能使用DOM中的方法，jQuery对象是不可以用DOM中的方法。</span></em></span></p>
 
 
@@ -104,7 +104,7 @@
     </div>
     
 <div class="old-article-warning">
-	本文在 <b>1255</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
+	本文在 <b>1285</b> 天之前发表，技术更替飞快，文中部分内容可能已经过时，如有疑问，
 	请在下方留言，或者联系 <a href="/about">小胡子哥</a>。
 </div>
 
@@ -327,6 +327,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

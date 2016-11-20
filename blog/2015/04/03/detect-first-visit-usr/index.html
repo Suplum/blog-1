@@ -85,9 +85,9 @@
 <li>如果待加载的页面存在于缓存中，不触发 onload，只触发 pageShow</li>
 </ul>
 <p>pageShow 事件对象 event 中有一个属性值，叫做 persisted，如果这个值为 true，则为缓存数据，false，则为第一次加载。</p>
-<h3 id="差异化加载"><a href="#差异化加载" class="headerlink" title="差异化加载"></a>差异化加载</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.body;</span><br><span class="line">body.onpageshow = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(evt.persisted)&#123;</span><br><span class="line">    <span class="comment">// 如果从缓存加载，该干啥干啥</span></span><br><span class="line">    doSomething();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 如果用户第一次访问（没有缓存），只加载主体框架</span></span><br><span class="line">    loadMainContent();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="差异化加载"><a href="#差异化加载" class="headerlink" title="差异化加载"></a>差异化加载</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.body;</div><div class="line">body.onpageshow = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(evt.persisted)&#123;</div><div class="line">    <span class="comment">// 如果从缓存加载，该干啥干啥</span></div><div class="line">    doSomething();</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// 如果用户第一次访问（没有缓存），只加载主体框架</span></div><div class="line">    loadMainContent();</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>在 <code>loadMainContent()</code> 我们可以这样干：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">funtion loadMainContent()&#123;</span><br><span class="line">  <span class="comment">// 引导用户执行操作，操作一次加载点东西</span></span><br><span class="line">  leadUserDoSomething();</span><br><span class="line">  <span class="comment">// 或者悄悄地缓慢的加载需要的数据</span></span><br><span class="line">  loadDataInQuickMode();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">funtion loadMainContent()&#123;</div><div class="line">  <span class="comment">// 引导用户执行操作，操作一次加载点东西</span></div><div class="line">  leadUserDoSomething();</div><div class="line">  <span class="comment">// 或者悄悄地缓慢的加载需要的数据</span></div><div class="line">  loadDataInQuickMode();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当然，通过 cookie 或者 pageshow 事件属性判断用户浏览器是否有缓存数据不是最终的解决方案，但这是一种思考模式，可以发散思维~</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2015/04/03/detect-first-visit-usr/">//www.barretlee.com/blog/2015/04/03/detect-first-visit-usr/</a></p>
@@ -314,6 +314,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

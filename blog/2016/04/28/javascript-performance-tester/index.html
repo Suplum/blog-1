@@ -73,7 +73,7 @@
 <ul>
 <li>在 <a href="http://jsperf.com" target="_blank" rel="external">http://jsperf.com</a> 上测试</li>
 <li><p>使用 <code>console.time</code> 来收集代码执行的时间</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.time(<span class="string">'Name'</span>);</span><br><span class="line"><span class="comment">// code here...</span></span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'Name'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.time(<span class="string">'Name'</span>);</div><div class="line"><span class="comment">// code here...</span></div><div class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'Name'</span>);</div></pre></td></tr></table></figure>
 </li>
 <li><p>自己写一个时间控制器</p>
 </li>
@@ -82,7 +82,7 @@
 <p>本文自然就是自己撸一个简单易用的测试工具，效果如下图：</p>
 <p><img src="//img.alicdn.com/tps/TB1d238JpXXXXcoXFXXXXXXXXXX-446-570.gif" alt="JavaScript 代码执行效率对比工具"></p>
 <h3 id="设计分析"><a href="#设计分析" class="headerlink" title="设计分析"></a>设计分析</h3><p>可以先把代码下载下来，跑起来：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> //github.com/barretlee/performance.git</span><br><span class="line"><span class="built_in">cd</span> performance/<span class="built_in">test</span>;</span><br><span class="line">open index.html;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">clone</span> //github.com/barretlee/performance.git</div><div class="line"><span class="built_in">cd</span> performance/<span class="built_in">test</span>;</div><div class="line">open index.html;</div></pre></td></tr></table></figure>
 <p>或者直接打开测试页面：<a href="http://barretlee.github.io/performance/test/" target="_blank" rel="external">http://barretlee.github.io/performance/test/</a>。</p>
 <p>点击代码按钮，Performance 会循环执行 button 中的代码，持续时间是设定的 1000ms，每次执行完，都会计算出相对效率，100% 是效率最高的，剩下的自然就是效率比较低的，从而可以比较清晰地看出程序之间性能差异。</p>
 <h3 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h3><ul>
@@ -313,6 +313,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

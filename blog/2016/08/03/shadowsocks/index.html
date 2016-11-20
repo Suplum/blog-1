@@ -78,17 +78,17 @@
 <h3 id="Shadowsocks-及其部署"><a href="#Shadowsocks-及其部署" class="headerlink" title="Shadowsocks 及其部署"></a>Shadowsocks 及其部署</h3><p>如果你理解了上面那道隐形的墙的原理，那 Shadowsocks 的原理就可以用一句简单的描述来理解了：它发出的 TCP 包，没有明显包特征，GFW 分析不出来，当作普通流量放过了。</p>
 <p><strong>1. 基本原理</strong></p>
 <p>具体而言，Shadowsocks 将原来 ssh 创建的 Socks5 协议拆开成 Server 端和 Client 端，两个端分别安装在境外服务器和境内设备上。</p>
-<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">+------+     +------+     +=====+     +------+     +-------+</span><br><span class="line">|<span class="string"> 设备  </span>|<span class="string"> &lt;-&gt; </span>|<span class="string">Client</span>|<span class="string"> &lt;-&gt; </span>|<span class="string"> GFW </span>|<span class="string"> &lt;-&gt; </span>|<span class="string">Server</span>|<span class="string"> &lt;-&gt; </span>|<span class="string"> 服务器 </span>|</span><br><span class="line">+------+     +------+     +=====+     +------+     +-------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><div class="line">+------+     +------+     +=====+     +------+     +-------+</div><div class="line">|<span class="string"> 设备  </span>|<span class="string"> &lt;-&gt; </span>|<span class="string">Client</span>|<span class="string"> &lt;-&gt; </span>|<span class="string"> GFW </span>|<span class="string"> &lt;-&gt; </span>|<span class="string">Server</span>|<span class="string"> &lt;-&gt; </span>|<span class="string"> 服务器 </span>|</div><div class="line">+------+     +------+     +=====+     +------+     +-------+</div></pre></td></tr></table></figure>
 <p>Client 和 Server 之间可以通过多种方式加密，并要求提供密码确保链路的安全性。</p>
 <p><strong>2. 服务器端部署</strong></p>
 <p>Shadowsocks 封装后对用户而言就是一个程序指令，以 Ubuntu 为例，首先安装 pip，</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install python-pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">apt-get install python-pip</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
 <p>注意 pip 的安装现在要求 python 版本大于等于 2.6，然后通过 pip 安装 shadowsocks。启动 shadowsocks 有两种方式，一种是通过一行命令直接启动：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssserver -p PORT -k PASSWORD -m rc4-md5 --log-file /tmp/ss.log <span class="operator">-d</span> start</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">ssserver -p PORT -k PASSWORD -m rc4-md5 --log-file /tmp/ss.log <span class="_">-d</span> start</div></pre></td></tr></table></figure>
 <p>另一种是使用 config 文件启动，如先配置好文件（/etc/shadowsocks.json）：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">server</span>": <span class="value"><span class="string">"YOUR_SERVER_IP"</span></span>,</span><br><span class="line">  "<span class="attribute">server_port</span>": <span class="value"><span class="number">8388</span></span>,  </span><br><span class="line">  "<span class="attribute">local_address</span>": <span class="value"><span class="string">"127.0.0.1"</span></span>,  </span><br><span class="line">  "<span class="attribute">local_port</span>": <span class="value"><span class="number">1080</span></span>,  </span><br><span class="line">  "<span class="attribute">password</span>": <span class="value"><span class="string">"PASSWORD"</span></span>,</span><br><span class="line">  "<span class="attribute">timeout</span>": <span class="value"><span class="number">300</span></span>,  </span><br><span class="line">  "<span class="attribute">method</span>":<span class="value"><span class="string">"aes-256-cfb"</span></span>,  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"server"</span>: <span class="string">"YOUR_SERVER_IP"</span>,</div><div class="line">  <span class="attr">"server_port"</span>: <span class="number">8388</span>,  </div><div class="line">  <span class="attr">"local_address"</span>: <span class="string">"127.0.0.1"</span>,  </div><div class="line">  <span class="attr">"local_port"</span>: <span class="number">1080</span>,  </div><div class="line">  <span class="attr">"password"</span>: <span class="string">"PASSWORD"</span>,</div><div class="line">  <span class="attr">"timeout"</span>: <span class="number">300</span>,  </div><div class="line">  <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后通过 ssserver 启动：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json <span class="operator">-d</span> start</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json <span class="_">-d</span> start</div></pre></td></tr></table></figure>
 <p>更加具体的配置说明，请戳 <a href="https://github.com/breakwa11/shadowsocks-rss/wiki/config.json" target="_blank" rel="external">这里</a> 和 <a href="https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup" target="_blank" rel="external">这里</a>。</p>
 <p><strong>3. 客户端配置</strong></p>
 <p>Mac 客户端的下载地址：</p>
@@ -105,10 +105,10 @@
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>刚开始在配置 ss-serser 的时候，我遇到了些问题，本地死活代理不成功，后来通过下面这种方式调试了下：</p>
 <p><strong>1.客户端通过 telnet ip port 确认 ss-server 是否正常开启</strong></p>
 <p>如果没有正常开启，有可能是设定的端口没有开放，</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport <span class="number">8388</span> -j ACCEPT</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">iptables -A INPUT -p tcp --dport 8388 -j ACCEPT</div></pre></td></tr></table></figure>
 <p>执行上述命令，将 8388 修改为你设定的端口即可。</p>
 <p><strong>2.如果第一步中连接正常，可以查看下 ss-server 的日志</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json --log-file /tmp/ss.log <span class="operator">-d</span> start</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json --log-file /tmp/ss.log <span class="_">-d</span> start</div></pre></td></tr></table></figure>
 <p>启动的时候添加 <code>--log-file</code> 参数，然后通过 <code>tail -f /tmp/ss.log</code> 查看实时日志，一般可以看出一点端倪。</p>
 <p>本文的普及就到这里了，希望对你有些帮助。</p>
 
@@ -328,14 +328,15 @@
 			
 			<li>
 				<span><font aria-hidden="true">2016-04-28 »</font> </span>
-				<a href="/blog/2016/04/28/mini-query/">元素选择器 - Mini Query</a>
+				<a href="/blog/2016/04/28/javascript-performance-tester/">JavaScript 代码执行效率对比工具</a>
 				<span class="aria-readonly">发表时间为2016年04月28日</span>
-				<div><span class="aria-readonly">文章概要 </span>寥寥几行代码，实现一个简单的元素选择器，兼容低版本 IE。</div>
+				<div><span class="aria-readonly">文章概要 </span>平时写些小页面小程序，一般不会出现性能问题，但是在大的工程，或者在写一个框架、类库的时候，代码的性能就需要提高一个优先级了。测试代码的性能有多种方案：在 http://jsperf.com 上测试使用 console.time 来收集代码执行的时间console.time('Name');// code here...console.timeEnd('Name');自己写一个时间控制器</div>
 			</li>
 			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

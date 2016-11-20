@@ -115,14 +115,14 @@
 <li>fork <a href="//github.com/barretlee/snippets.git">barretlee/snippets</a> 仓库</li>
 <li>然后执行如下命令</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> //github.com/&#123;YOUR_GITHUB_NAME&#125;/snippets.git</span><br><span class="line"><span class="built_in">cd</span> snippets</span><br><span class="line">git chechout -b gh-pages</span><br><span class="line"><span class="built_in">cd</span> snippets</span><br><span class="line"><span class="comment"># 选择你想提交的文件类型，比如 html</span></span><br><span class="line"><span class="built_in">cd</span> html</span><br><span class="line">touch &#123;YOUR_CONTRIBUTE_FILE_NAME&#125;.snippet</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">clone</span> //github.com/&#123;YOUR_GITHUB_NAME&#125;/snippets.git</div><div class="line"><span class="built_in">cd</span> snippets</div><div class="line">git chechout -b gh-pages</div><div class="line"><span class="built_in">cd</span> snippets</div><div class="line"><span class="comment"># 选择你想提交的文件类型，比如 html</span></div><div class="line"><span class="built_in">cd</span> html</div><div class="line">touch &#123;YOUR_CONTRIBUTE_FILE_NAME&#125;.snippet</div></pre></td></tr></table></figure>
 <p>其中，<code>{YOUR_CONTRIBUTE_FILE_NAME}.snippet</code> 的格式为：</p>
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="bullet">---</span><br><span class="line"></span><span class="header">title: &#123;NAME&#125;</span><br><span class="line">---</span></span><br><span class="line"></span><br><span class="line">&#123;CONTENT&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><div class="line"><span class="meta">---</span></div><div class="line"><span class="attr">title:</span> &#123;NAME&#125;</div><div class="line"><span class="meta">---</span></div><div class="line"></div><div class="line">&#123;CONTENT&#125;</div></pre></td></tr></table></figure>
 <p>可以使用 markdown 语法。</p>
 <ul>
 <li>提交代码</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git add <span class="comment">--all</span></span><br><span class="line">git <span class="operator"><span class="keyword">commit</span> -<span class="keyword">m</span> <span class="string">"add file html/&#123;YOUR_CONTRIBUTE_FILE_NAME&#125;.snippet"</span></span><br><span class="line">git push origin gh-pages</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">add</span><span class="bash"> --all</span></div><div class="line">git commit -m <span class="string">"add file html/&#123;YOUR_CONTRIBUTE_FILE_NAME&#125;.snippet"</span></div><div class="line">git push origin gh-pages</div></pre></td></tr></table></figure>
 <ul>
 <li>然后在你的 <a href="//github.com/{YOUR_GITHUB_NAME}/snippets/pulls">PR</a> 页面提交一个 PR 到 <code>barretlee/snippets</code> 的仓库</li>
 </ul>
@@ -351,6 +351,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

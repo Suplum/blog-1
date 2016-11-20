@@ -73,10 +73,10 @@
 
 <p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p><br><blockquote><br><p>Mixed Content: The page at “<a href="//www.taobao.com/">//www.taobao.com/</a>“ was loaded over HTTPS, but requested an insecure image “<a href="http://g.alicdn.com/s.gif" target="_blank" rel="external">http://g.alicdn.com/s.gif</a>“. This content should also be served over HTTPS.</p><br></blockquote><br><p>HTTPS改造之后，我们可以在很多页面中看到如下警报：</p><br><p><img src="http://images0.cnblogs.com/blog2015/387325/201508/211107536449320.png" alt=""></p><br><p>很多运营对 https 没有技术概念，在填入的数据中不免出现 http 的资源，体系庞大，出现疏忽和漏洞也是不可避免的。</p><br><h3 id="cspupgrade-insecure-requests"><a class="headeranchor-link" name="user-content-cspupgrade-insecure-requests" href="#cspupgrade-insecure-requests"></a>CSP设置upgrade-insecure-requests</h3><br><p>好在 W3C 工作组考虑到了我们升级 HTTPS 的艰难，在 2015 年 4 月份就出了一个 <code>Upgrade Insecure Requests</code> 的<a href="http://www.w3.org/TR/mixed-content/" target="_blank" rel="external">草案</a>，他的作用就是让浏览器自动升级请求。</p><br><p>在我们服务器的响应头中加入：</p>
 
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="keyword"><span class="common">header</span></span>(<span class="string">"Content-Security-Policy: upgrade-insecure-requests"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">header(<span class="string">"Content-Security-Policy: upgrade-insecure-requests"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>我们的页面是 https 的，而这个页面中包含了大量的 http 资源（图片、iframe等），页面一旦发现存在上述响应头，会在加载 http 资源时自动替换成 https 请求。可以查看 google 提供的一个 <a href="//googlechrome.github.io/samples/csp-upgrade-insecure-requests/index.html">demo</a>：</p><br><p><img src="http://images0.cnblogs.com/blog2015/387325/201508/211108018005511.png" alt=""></p><br><p>不过让人不解的是，这个资源发出了两次请求，猜测是浏览器实现的 bug：</p><br><p><img src="http://images0.cnblogs.com/blog2015/387325/201508/211108089252988.png" alt=""></p><br><p>当然，如果我们不方便在服务器/Nginx 上操作，也可以在页面中加入 <code>meta</code> 头：</p>
 
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Security-Policy"</span> <span class="attribute">content</span>=<span class="value">"upgrade-insecure-requests"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"upgrade-insecure-requests"</span>&gt;</span></div></pre></td></tr></table></figure>
 <p></p><p>目前支持这个设置的还只有 chrome 43.0，不过我相信，CSP 将成为未来 web 前端安全大力关注和使用的内容。而 <code>upgrade-insecure-requests</code> 草案也会很快进入 RFC 模式。</p><p></p>
 <p></p><p>从 W3C 工作组给出的 <a href="http://www.w3.org/TR/upgrade-insecure-requests/#examples" target="_blank" rel="external">example</a>，可以看出，这个设置不会对外域的 a 链接做处理，所以可以放心使用。</p><p></p>
 <p></p><h3 id="_1"><a class="headeranchor-link" name="user-content-_1" href="#_1"></a>相关阅读</h3><p></p>
@@ -307,6 +307,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

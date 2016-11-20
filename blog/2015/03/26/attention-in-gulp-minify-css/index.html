@@ -73,10 +73,10 @@
 <p>之前看过一些 gulp 和 grunt 相关的东西，但是没怎么用，有一次做项目用到，不过那次做的是一个监控系统，内部用，不要考虑兼容性问题，今天在处理业务的时候，用到了 gulp。</p>
 <p>业务的老代码，不算很陈旧，2013年的（尚好是吧~）,那个时候也没啥太好用的压缩工具，翻出来的代码也没有一个默认的脚本可以自动打包，于是就用上了 gulp。</p>
 <p>css 打包代码：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">gulp.task('css', function()&#123;</span><br><span class="line">  gulp.src('src/**/*.css')</span><br><span class="line">    .pipe(gulp.dest('build'))</span><br><span class="line">    .pipe(minicss())</span><br><span class="line">    .pipe(rename(&#123;</span><br><span class="line">      suffix:"-min"</span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(gulp.dest('build'));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">gulp.task('css', function()&#123;</div><div class="line">  gulp.src('src/**/*.css')</div><div class="line">    .pipe(gulp.dest('build'))</div><div class="line">    .pipe(minicss())</div><div class="line">    .pipe(rename(&#123;</div><div class="line">      suffix:"-min"</div><div class="line">    &#125;))</div><div class="line">    .pipe(gulp.dest('build'));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>坑在哪里呢，没仔细看文档，<code>gulp-minify-css</code> 这个 gulp 插件就直接用上了，没想到他竟然把所有的低版本IE hack代码给干掉了，哭…</p>
 <p>同学们要引起注意，记得在 minicss() 中送入参数：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">compatibility</span>": <span class="value"><span class="string">"ie7"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"compatibility"</span>: <span class="string">"ie7"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>具体其他配置请移步<a href="//github.com/jakubpawlowicz/clean-css#how-to-set-compatibility-mode">官方文档</a>。</p>
 
         <!--<p class="article-info">文/<a href="/about/"><img src="/avatar150.png">李靖</a>　微信公众号：barretlee_com</p><p class="this-page-link" aria-hidden="true">本文链接：<a href="//www.barretlee.com/blog/2015/03/26/attention-in-gulp-minify-css/">//www.barretlee.com/blog/2015/03/26/attention-in-gulp-minify-css/</a></p>
@@ -303,6 +303,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

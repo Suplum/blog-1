@@ -9,8 +9,22 @@
     <script xmlns="http://www.w3.org/1999/xhtml" src="/public/js/rss.js"></script>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[想法，随笔，思考，感叹，瞬间，笔记...]]></description>
-    <pubDate>Fri Oct 21 2016 03:23:37 GMT+0800 (CST)</pubDate>
+    <pubDate>Sun Nov 20 2016 23:09:40 GMT+0800 (CST)</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Nginx 配置简述]]></title>
+      <link>http://www.barretlee.com/blog/2016/11/19/nginx-configuration-start/</link>
+      <guid>http://www.barretlee.com/blog/2016/11/19/nginx-configuration-start/</guid>
+      <pubDate>Sat Nov 19 2016 23:51:46 GMT+0800 (CST)</pubDate>
+      <description>
+      <![CDATA[不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，配置起来也比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。]]>
+      
+      </description>
+      <content:encoded><![CDATA[不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，配置起来也比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。]]>
+      </content:encoded>
+      <comments>http://www.barretlee.com/blog/2016/11/19/nginx-configuration-start/#comments</comments>
+    </item>
     
     <item>
       <title><![CDATA[谈一谈我在阿里的成长]]></title>
@@ -416,20 +430,6 @@
       <content:encoded><![CDATA[对很多开发者，尤其是手握几台甚至几十台机器的同学而言，登录到远程机器处理事务应该是家常便饭。如果你也是其中一员，悄悄问一句，你平时是如何记住一堆帐号、机器地址以及一些附加登录选项的呢？或许你也是这么干的...]]>
       </content:encoded>
       <comments>http://www.barretlee.com/blog/2016/03/09/config-in-ssh-after-troubling-git-connection/#comments</comments>
-    </item>
-    
-    <item>
-      <title><![CDATA[认识网页无障碍]]></title>
-      <link>http://www.barretlee.com/blog/2016/03/05/steps-of-web-content-accessibility/</link>
-      <guid>http://www.barretlee.com/blog/2016/03/05/steps-of-web-content-accessibility/</guid>
-      <pubDate>Sat Mar 05 2016 16:26:23 GMT+0800 (CST)</pubDate>
-      <description>
-      <![CDATA[网页无障碍相关的学习和研究已经坚持了好几个星期了，看了不少文档，也在 Google 中寻觅了不少博客文章，总的来说就一个感受：文档太细节太长，博客指导性不强。文本主要从网页无障碍的思路上做了一些阐述，可能不严谨，也可能有表述不当的地方，如果你对这方面有研究，欢迎提出你的观点，也期待更多人关注网页无障碍化。]]>
-      
-      </description>
-      <content:encoded><![CDATA[网页无障碍相关的学习和研究已经坚持了好几个星期了，看了不少文档，也在 Google 中寻觅了不少博客文章，总的来说就一个感受：文档太细节太长，博客指导性不强。文本主要从网页无障碍的思路上做了一些阐述，可能不严谨，也可能有表述不当的地方，如果你对这方面有研究，欢迎提出你的观点，也期待更多人关注网页无障碍化。]]>
-      </content:encoded>
-      <comments>http://www.barretlee.com/blog/2016/03/05/steps-of-web-content-accessibility/#comments</comments>
     </item>
     
   </channel>

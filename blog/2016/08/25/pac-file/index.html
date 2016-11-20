@@ -74,7 +74,7 @@
 <a id="more"></a>
 <h3 id="什么是-PAC"><a href="#什么是-PAC" class="headerlink" title="什么是 PAC"></a>什么是 PAC</h3><p>PAC，一个自动代理配置脚本，包含了很多使用 JavaScript 编写的规则，它能够决定网络流量走默认通道还是代理服务器通道，控制的流量类型包括：HTTP、HTTPS 和 FTP。</p>
 <p>它是一段 JavaScript 脚本：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindProxyForURL</span>(<span class="params">url, host</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindProxyForURL</span>(<span class="params">url, host</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面就是一个最简洁的 PAC 文件，意思是所有流量都直接进入互联网，不走代理。</p>
 <h3 id="PAC-语法和函数"><a href="#PAC-语法和函数" class="headerlink" title="PAC 语法和函数"></a>PAC 语法和函数</h3><p>上面函数中，<code>url</code> 字段就是我们在浏览器地址栏输入的待访问地址，<code>host</code> 为该地址对应的 hostname，<code>return</code> 语句有三种指令：</p>
 <ul>
@@ -83,45 +83,45 @@
 <li><code>SOCKS host:port</code>，表示走 <code>host:port</code> 的 socks 服务</li>
 </ul>
 <p>而返回的接口可以是多个代理串联：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="string">"PROXY 222.20.74.89:8800; SOCKS 222.20.74.89:8899; DIRECT"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="string">"PROXY 222.20.74.89:8800; SOCKS 222.20.74.89:8899; DIRECT"</span>;</div></pre></td></tr></table></figure>
 <p>上面代理的意思是，默认走 <code>222.20.74.89:8800</code> 的 proxy 服务；如果代理挂了或者超时，则走 <code>222.20.74.89:8899</code> 的 socks 代理；如果 socks 也挂了，则无代理直接连接。从这里可以看出 PAC 的一大优势：自动容灾。</p>
 <p>PAC 提供了几个内置的函数，下面一一介绍下：</p>
 <p><strong>dnsDomainIs</strong></p>
 <p>类似于 <code>==</code>，但是对大小写不敏感，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (dnsDomainIs(host, <span class="string">"google.com"</span>) || </span><br><span class="line">    dnsDomainIs(host, <span class="string">"www.google.com"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (dnsDomainIs(host, <span class="string">"google.com"</span>) || </div><div class="line">    dnsDomainIs(host, <span class="string">"www.google.com"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>shExpMatch</strong></p>
 <p>Shell 正则匹配，<code>*</code> 匹配用的比较多，可以是 <code>*.example.com</code>，也是可以下面这样，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shExpMatch(host, <span class="string">"vpn.domain.com"</span>) ||</span><br><span class="line">    shExpMatch(url, <span class="string">"http://abcdomain.com/folder/*"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (shExpMatch(host, <span class="string">"vpn.domain.com"</span>) ||</div><div class="line">    shExpMatch(url, <span class="string">"http://abcdomain.com/folder/*"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>isInNet</strong></p>
 <p>判断是否在网段内容，比如 <code>10.1.0.0</code> 这个网段，<code>10.1.1.0</code> 就在网段中，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (isInNet(dnsResolve(host), <span class="string">"172.16.0.0"</span>, <span class="string">"255.240.0.0"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (isInNet(dnsResolve(host), <span class="string">"172.16.0.0"</span>, <span class="string">"255.240.0.0"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>myIpAddress</strong></p>
 <p>返回主机的 IP，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (isInNet(myIpAddress(), <span class="string">"10.10.1.0"</span>, <span class="string">"255.255.255.0"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY 10.10.5.1:8080"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (isInNet(myIpAddress(), <span class="string">"10.10.1.0"</span>, <span class="string">"255.255.255.0"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY 10.10.5.1:8080"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>dnsResolve</strong></p>
 <p>通过 DNS 查询主机 ip，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (isInNet(dnsResolve(host), <span class="string">"10.0.0.0"</span>, <span class="string">"255.0.0.0"</span>) ||</span><br><span class="line">    isInNet(dnsResolve(host), <span class="string">"172.16.0.0"</span>,  <span class="string">"255.240.0.0"</span>) ||</span><br><span class="line">    isInNet(dnsResolve(host), <span class="string">"192.168.0.0"</span>, <span class="string">"255.255.0.0"</span>) ||</span><br><span class="line">    isInNet(dnsResolve(host), <span class="string">"127.0.0.0"</span>, <span class="string">"255.255.255.0"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (isInNet(dnsResolve(host), <span class="string">"10.0.0.0"</span>, <span class="string">"255.0.0.0"</span>) ||</div><div class="line">    isInNet(dnsResolve(host), <span class="string">"172.16.0.0"</span>,  <span class="string">"255.240.0.0"</span>) ||</div><div class="line">    isInNet(dnsResolve(host), <span class="string">"192.168.0.0"</span>, <span class="string">"255.255.0.0"</span>) ||</div><div class="line">    isInNet(dnsResolve(host), <span class="string">"127.0.0.0"</span>, <span class="string">"255.255.255.0"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>isPlainHostName</strong></p>
 <p>判断是否为诸如 <code>http://barret/</code>，<code>http://server-name/</code> 这样的主机名，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (isPlainHostName(host)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (isPlainHostName(host)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>isResolvable</strong></p>
 <p>判断主机是否可访问，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (isResolvable(host)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (isResolvable(host)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>dnsDomainLevels</strong></p>
 <p>返回是几级域名，比如 <code>dnsDomainLevels(barretlee.com)</code> 返回的结果就是 1，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (dnsDomainLevels(host) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (dnsDomainLevels(host) &gt; <span class="number">0</span>) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>weekdayRange</strong></p>
 <p>周一到周五，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (weekdayRange(<span class="string">"MON"</span>, <span class="string">"FRI"</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (weekdayRange(<span class="string">"MON"</span>, <span class="string">"FRI"</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>dateRange</strong></p>
 <p>一月到五月，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (dateRange(<span class="string">"JAN"</span>, <span class="string">"MAR"</span>))  &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (dateRange(<span class="string">"JAN"</span>, <span class="string">"MAR"</span>))  &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;  </div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>timeRange</strong></p>
 <p>八点到十八点，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (timeRange(<span class="number">8</span>, <span class="number">18</span>)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (timeRange(<span class="number">8</span>, <span class="number">18</span>)) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"PROXY proxy1.example.com:8080"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"DIRECT"</span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>alert</strong></p>
 <p>据说这个函数可以用来调试，不过我在 Chrome 上测试并未生效，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">resolved_host = dnsResolve(host);</span><br><span class="line">alert(resolved_host);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">resolved_host = dnsResolve(host);</div><div class="line">alert(resolved_host);</div></pre></td></tr></table></figure>
 <h3 id="PAC-文件的安装和注意事项"><a href="#PAC-文件的安装和注意事项" class="headerlink" title="PAC 文件的安装和注意事项"></a>PAC 文件的安装和注意事项</h3><p>在 Windows 系统中，通过「Internet选项 -&gt; 连接 -&gt; 局域网设置 -&gt; 使用自动配置脚本」可以找到配置处，下放的地址栏填写  PAC 文件的 URI，这个 URI 可以是本地资源路径(file:///)，也可以是网络资源路径(<a href="http://)。" target="_blank" rel="external">http://)。</a></p>
 <p>Chrome 中可以在「chrome://settings/ -&gt; 显示高级设置 -&gt; 更改代理服务器设置」中找到 PAC 填写地址。</p>
 <p><strong>需要注意的几点：</strong></p>
@@ -332,6 +332,13 @@
 		
 		<ul>
 			<li>
+				<span><font aria-hidden="true">2016-11-19 »</font> </span>
+				<a href="/blog/2016/11/19/nginx-configuration-start/">Nginx 配置简述</a>
+				<span class="aria-readonly">发表时间为2016年11月19日</span>
+				<div><span class="aria-readonly">文章概要 </span>不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，如果考虑性能配置起来会比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。本文将给大家介绍 Nginx 配置的基本知识，不想细看的同学可以直接跳到最后一个例子。</div>
+			</li>
+			
+			<li>
 				<span><font aria-hidden="true">2016-08-03 »</font> </span>
 				<a href="/blog/2016/08/03/shadowsocks/">Shadowsocks 原理简介及安装指南</a>
 				<span class="aria-readonly">发表时间为2016年08月03日</span>
@@ -352,16 +359,10 @@
 				<div><span class="aria-readonly">文章概要 </span>页面上发现几个模块展示比较缓慢，白了大约 5s 之后展示兜底，显然，是接口请求超时了，打开控制台一看，果然，接口挂了。看了下相关页面，因为大量用到这个接口，模块也都加载超时了。换一台电脑看了下，存在一样的问题，确认是接口挂了。</div>
 			</li>
 			
-			<li>
-				<span><font aria-hidden="true">2016-03-09 »</font> </span>
-				<a href="/blog/2016/03/09/config-in-ssh-after-troubling-git-connection/">多 SSH Key 管理技巧与 Git 多账户登录问题</a>
-				<span class="aria-readonly">发表时间为2016年03月09日</span>
-				<div><span class="aria-readonly">文章概要 </span>对很多开发者，尤其是手握几台甚至几十台机器的同学而言，登录到远程机器处理事务应该是家常便饭。如果你也是其中一员，悄悄问一句，你平时是如何记住一堆帐号、机器地址以及一些附加登录选项的呢？或许你也是这么干的：</div>
-			</li>
-			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

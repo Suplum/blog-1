@@ -74,7 +74,7 @@
 <h3 id="中间人劫持"><a href="#中间人劫持" class="headerlink" title="中间人劫持"></a>中间人劫持</h3><p>起因是这样，https 使用的是 443 端口进行数据传输，而浏览器的默认端口是 80. 劫持者首先劫持用户的 80 端口，当用户向目标页发起请求时，劫持者模拟正常的 https 请求向源服务器获取数据，然后通过 80 端口返回给用户，大概可以看下下面两张图：</p>
 <p><img src="//www.barretlee.com/blogimgs/2015/10/20151004_d1771371.jpg" alt="正常请求"></p>
 <p>用户一般不会在地址栏输入 <code>//www.taobao.com</code>，而是习惯性输入 <code>taobao.com</code> ，此时浏览器走的是 http，请求到达服务器之后，服务器告诉浏览器 302 跳转</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="string">Location:</span> <span class="comment">//www.taobao.com</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">Location:</span> <span class="comment">//www.taobao.com</span></div></pre></td></tr></table></figure>
 <p>然后浏览器重新请求，通过 HTTPS 方式，443 端口通讯。而正因为用户不是直接输入 <code>//</code> 链接，劫持者利用这一点：</p>
 <p><img src="//www.barretlee.com/blogimgs/2015/10/20151004_f70b86fd.jpg" alt="screenshot"></p>
 <p>只要能够劫持你的网络，比如路由劫持、DNS劫持，就可以作为中间人注入代码、替换广告。。。（上了 https 也拗不过电信，真是日了够了）</p>
@@ -298,6 +298,13 @@
 		
 		<ul>
 			<li>
+				<span><font aria-hidden="true">2016-11-19 »</font> </span>
+				<a href="/blog/2016/11/19/nginx-configuration-start/">Nginx 配置简述</a>
+				<span class="aria-readonly">发表时间为2016年11月19日</span>
+				<div><span class="aria-readonly">文章概要 </span>不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，如果考虑性能配置起来会比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。本文将给大家介绍 Nginx 配置的基本知识，不想细看的同学可以直接跳到最后一个例子。</div>
+			</li>
+			
+			<li>
 				<span><font aria-hidden="true">2016-08-25 »</font> </span>
 				<a href="/blog/2016/08/25/pac-file/">详解代理自动配置 PAC</a>
 				<span class="aria-readonly">发表时间为2016年08月25日</span>
@@ -318,16 +325,10 @@
 				<div><span class="aria-readonly">文章概要 </span>CA，Catificate Authority，它的作用就是提供证书（即服务器证书，由域名、公司信息、序列号和签名信息组成）加强服务端和客户端之间信息交互的安全性，以及证书运维相关服务。任何个体/组织都可以扮演 CA 的角色，只不过难以得到客户端的信任，能够受浏览器默认信任的 CA 大厂商有很多，其中 TOP5 是 Symantec、Comodo、Godaddy、GolbalSign 和 Digicert。</div>
 			</li>
 			
-			<li>
-				<span><font aria-hidden="true">2016-03-19 »</font> </span>
-				<a href="/blog/2016/03/19/problem-debugging/">对系统链路问题排查的一些看法</a>
-				<span class="aria-readonly">发表时间为2016年03月19日</span>
-				<div><span class="aria-readonly">文章概要 </span>页面上发现几个模块展示比较缓慢，白了大约 5s 之后展示兜底，显然，是接口请求超时了，打开控制台一看，果然，接口挂了。看了下相关页面，因为大量用到这个接口，模块也都加载超时了。换一台电脑看了下，存在一样的问题，确认是接口挂了。</div>
-			</li>
-			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

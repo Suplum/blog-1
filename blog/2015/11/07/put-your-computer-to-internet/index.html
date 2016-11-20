@@ -82,7 +82,7 @@
 <p>我的博客托管在 github 提供的静态文本服务中，之前买的主机也到期了，所以就选择了方案二。</p>
 <p><strong>1. 先拿到本地 IP</strong></p>
 <p>在命令行输入 <code>ifconfig/ipconfig</code> 只能拿到路由器 DHCP 分配的地址，如 192.168.0.110，想拿到 IP，必须跟外网打交道，比如：<code>curl ipinfo.io</code>。</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">➜  ddns git:(<span class="literal">master</span>) ✗ curl ip<span class="number">inf</span>o.io</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"ip"</span>: <span class="string">"115.*.*.*"</span>,</span><br><span class="line">  <span class="string">"hostname"</span>: <span class="string">"No Hostname"</span>,</span><br><span class="line">  <span class="string">"city"</span>: <span class="string">"Hangzhou"</span>,</span><br><span class="line">  <span class="string">"region"</span>: <span class="string">"Zhejiang Sheng"</span>,</span><br><span class="line">  <span class="string">"country"</span>: <span class="string">"CN"</span>,</span><br><span class="line">  <span class="string">"loc"</span>: <span class="string">"30.*,120.*"</span>,</span><br><span class="line">  <span class="string">"org"</span>: <span class="string">"*"</span></span><br><span class="line">&#125;%</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">➜  ddns git:(<span class="literal">master</span>) ✗ curl ip<span class="literal">inf</span>o.io</div><div class="line">&#123;</div><div class="line">  <span class="string">"ip"</span>: <span class="string">"115.*.*.*"</span>,</div><div class="line">  <span class="string">"hostname"</span>: <span class="string">"No Hostname"</span>,</div><div class="line">  <span class="string">"city"</span>: <span class="string">"Hangzhou"</span>,</div><div class="line">  <span class="string">"region"</span>: <span class="string">"Zhejiang Sheng"</span>,</div><div class="line">  <span class="string">"country"</span>: <span class="string">"CN"</span>,</div><div class="line">  <span class="string">"loc"</span>: <span class="string">"30.*,120.*"</span>,</div><div class="line">  <span class="string">"org"</span>: <span class="string">"*"</span></div><div class="line">&#125;%</div></pre></td></tr></table></figure>
 <p>如上所示，通过 ipinfo.io 提供的服务，我们可以很方便拿到外网。</p>
 <p><strong>2. 推到 DNSPod</strong></p>
 <p>如果你在其他域名提供商购买的域名，你需要将你的域名解析从提供商迁移到 DNSPod，这方面的迁移网上资料很多，可以搜索一下。DNSPod 相比其他提供商的域名解析服务，要更加优质，而且提供了 D监控，实时为你的域名解析保驾护航，有问题会及时邮件、短信警报。</p>
@@ -90,20 +90,20 @@
 <p><img src="//www.barretlee.com/blogimgs/2015/11/20151106_9132f343.jpg" alt="DNSPod proxy.barretlee.com"></p>
 <p>这一步完成之后，你就可以通过 DNSPod 提供的接口修改 A 记录了。具体用到了三个接口：</p>
 <p>1) <code>//dnsapi.cn/Domain.List</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -k //dnsapi.cn/Domain.List <span class="operator">-d</span> <span class="string">"login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">curl -k //dnsapi.cn/Domain.List <span class="_">-d</span> <span class="string">"login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json"</span></div></pre></td></tr></table></figure>
 <p>我在后面加了一个参数 <code>format=json</code>，默认是 xml 格式。在这里可以拿到 Domain 信息，比如我就拿到了在 DNSPod 上的两个域名信息，一个是 barret.cc 的具体信息，一个是 barretlee.com 的具体信息。这里有用的是 barretlee.com 中的 id 字段，我拿到的值为 25348135。</p>
 <p>2) <code>//dnsapi.cn/Record.List</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -k //dnsapi.cn/Record.List <span class="operator">-d</span> <span class="string">"login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=25348135"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">curl -k //dnsapi.cn/Record.List <span class="_">-d</span> <span class="string">"login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=25348135"</span></div></pre></td></tr></table></figure>
 <p>通过这个接口，可以拿到 barretlee.com 所有子域名的信息，<code>proxy.barretlee.com</code> 对应的 record 的 id 字段值为 126112527。</p>
 <p>3) <code>//dnsapi.cn/Record.Ddns</code>,<code>//dnsapi.cn/Record.Modify</code></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">## 查询 proxy.barretlee.com 域名对应的 <span class="keyword">A</span> 记录</span><br><span class="line">curl -X POST //dnsapi.cn/Record.Ddns -d 'login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=<span class="number">25348135</span>&amp;record_id=<span class="number">126112527</span>&amp;record_line=默认&amp;sub_domain=proxy'</span><br><span class="line"></span><br><span class="line">## 修改 proxy.barretlee.com 域名对应的 <span class="keyword">A</span> 记录</span><br><span class="line">curl -X POST //dnsapi.cn/Record.Modify -d 'login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=<span class="number">25348135</span>&amp;record_id=<span class="number">126112527</span>&amp;sub_domain=proxy&amp;record_line=默认&amp;record_type=<span class="keyword">A</span>&amp;value=YOUR_LOCAL_IP'</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment">## 查询 proxy.barretlee.com 域名对应的 A 记录</span></div><div class="line">curl -X POST //dnsapi.cn/Record.Ddns <span class="_">-d</span> <span class="string">'login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=25348135&amp;record_id=126112527&amp;record_line=默认&amp;sub_domain=proxy'</span></div><div class="line"></div><div class="line"><span class="comment">## 修改 proxy.barretlee.com 域名对应的 A 记录</span></div><div class="line">curl -X POST //dnsapi.cn/Record.Modify <span class="_">-d</span> <span class="string">'login_email=YOUR_REGISTER_EMAIL&amp;login_password=YOUR_PASSWORD&amp;format=json&amp;domain_id=25348135&amp;record_id=126112527&amp;sub_domain=proxy&amp;record_line=默认&amp;record_type=A&amp;value=YOUR_LOCAL_IP'</span></div></pre></td></tr></table></figure>
 <p>前两个请求是 GET 方式，而这里的请求是 POST 方式，具体文档在 <a href="http://www.dnspod.cn/docs/records.html#record-modify" target="_blank" rel="external">这里</a>。有人用 <a href="//gist.github.com/chuangbo/833369">python</a> 和 <a href="//github.com/William-Sang/ddns">php</a> 都写了工具，我就没有重复早轮了，后面 php 那个稍微靠谱点，但是查询本地外网 IP 用了他自己提供的服务，我做了点修改（改成使用 ipinfo.io 提供的服务，稍微靠谱点），可以戳这里：</p>
 <p>Github：<a href="http://github.com/barretlee/ddns" target="_blank" rel="external">http://github.com/barretlee/ddns</a></p>
 <p><strong>3. 定时推</strong></p>
 <p>前文提到，IP 是会变化的，为了保证 proxy.barretlee.com 能够准确解析到本机，IP 变化的时候需要快速更新 A 记录，为了简洁，可以设置定时任务，每隔 1 分钟推送一次：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 执行</span></span><br><span class="line">crontab <span class="operator">-e</span> </span><br><span class="line"><span class="comment"># 写入任务</span></span><br><span class="line">* * * * * php path/to/ddns/index.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 执行</span></div><div class="line">crontab <span class="_">-e</span> </div><div class="line"><span class="comment"># 写入任务</span></div><div class="line">* * * * * php path/to/ddns/index.php</div></pre></td></tr></table></figure>
 <p>使用 crontab 创建一个定时任务，实时推送。可以通过 <code>crontab -l</code> 查看任务列表。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证效果</span></span><br><span class="line">ping proxy.barretlee.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 验证效果</span></div><div class="line">ping proxy.barretlee.com</div></pre></td></tr></table></figure>
 <p>以上就能够通过 proxy.barretlee.com 获取到家里机器的 IP 地址了。需要注意的是，你们家电信宽带服务可能并不是通过路由拨号上网的，当你访问 proxy.barretlee.com 或者拿到的 IP 时，你会看到如下登录提示：</p>
 <p><img src="//www.barretlee.com/blogimgs/2015/11/20151106_b70393af.jpg" alt="login"></p>
 <p>这个时候你就致电 10000，选择人工服务器，让电信帮你设置为通过路由器登录吧~（生效时间估计得二十多分钟，需要重启猫、路由等设备）</p>
@@ -327,6 +327,13 @@
 		
 		<ul>
 			<li>
+				<span><font aria-hidden="true">2016-11-19 »</font> </span>
+				<a href="/blog/2016/11/19/nginx-configuration-start/">Nginx 配置简述</a>
+				<span class="aria-readonly">发表时间为2016年11月19日</span>
+				<div><span class="aria-readonly">文章概要 </span>不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，如果考虑性能配置起来会比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。本文将给大家介绍 Nginx 配置的基本知识，不想细看的同学可以直接跳到最后一个例子。</div>
+			</li>
+			
+			<li>
 				<span><font aria-hidden="true">2016-03-19 »</font> </span>
 				<a href="/blog/2016/03/19/problem-debugging/">对系统链路问题排查的一些看法</a>
 				<span class="aria-readonly">发表时间为2016年03月19日</span>
@@ -347,16 +354,10 @@
 				<div><span class="aria-readonly">文章概要 </span>Web 发展了几十个春秋，风起云涌，千变万化。我很庆幸自己没有完整地经历过这些年头，而是站在前人的肩膀上行走。Web 技术发展的速度让人感觉那几乎不是继承式的迭代，而是一次又一次的变革，一次又一次的创造。这几年的前端，更为之甚！我从 12 年底开始接触前端，12 年之前的前端发展情况只能从上一辈的笔触中领会。本文会盘点从 09 年开始到 15 年间前端技术的革新，同时也会从多个角度，解读近几年前端技术发展的潜在因素，其中穿插了若干对前端演进的拙见，难免会有错误和疏漏，望读者可以补充和斧正。</div>
 			</li>
 			
-			<li>
-				<span><font aria-hidden="true">2015-09-08 »</font> </span>
-				<a href="/blog/2015/09/08/add-watermark-to-images/">nodejs给图片批量加水印</a>
-				<span class="aria-readonly">发表时间为2015年09月08日</span>
-				<div><span class="aria-readonly">文章概要 </span>本只是想给博客添加个水印，github 上搜索了半天，找了一个比较小巧的库，叫做 images。</div>
-			</li>
-			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

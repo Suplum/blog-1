@@ -70,28 +70,28 @@
           <img src="//www.barretlee.com/blogimgs/avatar150.png">
         </div>
         <p>IDE 用起来总是得不到满足，Mac 适合搞开发，我也十分喜欢 Mac 系统，当然可以说喜欢 Unix/Linux 系统。今天在 <code>.zshrc</code> 文件中添加了这么几行快捷命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> gow   = <span class="string">"cd ~/barretlee/work"</span></span><br><span class="line"><span class="built_in">alias</span> gotb  = <span class="string">"cd ~/barretlee/work/tb"</span></span><br><span class="line"><span class="built_in">alias</span> gotbn = <span class="string">"cd ~/barretlee/work/tb/node"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">alias</span> gow   = <span class="string">"cd ~/barretlee/work"</span></div><div class="line"><span class="built_in">alias</span> gotb  = <span class="string">"cd ~/barretlee/work/tb"</span></div><div class="line"><span class="built_in">alias</span> gotbn = <span class="string">"cd ~/barretlee/work/tb/node"</span></div></pre></td></tr></table></figure>
 <p>写完之后我立马把这几行命令删掉了，这种方式似乎有点二。网上搜罗了下，找到了一个挺不错的工具 - autojump。</p>
 <p>Autojump 自己是这么描述的：</p>
 <blockquote>
 <p>autojump  is  a  faster way to navigate your filesystem.  It works by maintaining a database of the directories you use the most from the command line.</p>
 </blockquote>
 <p>通过 <code>history</code> 命令你可以找到最近用过的命令，比如</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">history</span> | grep <span class="string">"git clone"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">history</span> | grep <span class="string">"git clone"</span></div></pre></td></tr></table></figure>
 <p>通过上述命令就能找到近期 clone 了哪些库，省却了写一堆代码的功夫。autojump 就是通过记录你在 history 中的行为把你访问过的文件夹路径都 cache 下来，当你进行如下操作时：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">autojump node</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">autojump node</div></pre></td></tr></table></figure>
 <p>他会直接跳到之前访问的 <code>~/barretlee/work/tb/node</code> 目录下。他还有一个快捷方式：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">j node</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">j node</div></pre></td></tr></table></figure>
 <p>我很喜欢这个小工具，让我游荡于文件夹之间不费吹灰之力。</p>
 <h3 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h3><ul>
 <li>建议安装 zsh</li>
 <li>建议安装 homebrew</li>
 <li><code>brew install autojump</code></li>
 <li><p>在 <code>.zshrc</code> 中找到 <code>plugins=</code>，在后面添加 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">plugins=(git autojump)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">plugins=(git autojump)</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后继续在上述文件中添加 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[[ <span class="operator">-s</span> $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;&amp; . $(brew --prefix)/etc/profile.d/autojump.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">[[ <span class="_">-s</span> $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;&amp; . $(brew --prefix)/etc/profile.d/autojump.sh</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>source ~/.zshrc</code></p>
 </li>
@@ -315,6 +315,7 @@
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">

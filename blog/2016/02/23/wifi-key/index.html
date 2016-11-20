@@ -99,9 +99,9 @@
 <p>还有一种方式是，在路由器中，将无线设置的 SSID 广播改为「隐藏」，周边设备就没办法找到你家的 WiFi 网络了。</p>
 <h3 id="常规的-WiFi-热点设置原理"><a href="#常规的-WiFi-热点设置原理" class="headerlink" title="常规的 WiFi 热点设置原理"></a>常规的 WiFi 热点设置原理</h3><p>分享一段跑题的内容。</p>
 <p>以前使用 Window/Linux 系统的时候，尝试过将自己的电脑作为热点把网络分享给其他同学，刚开始使用了叫做 猎豹WiFi 的软件，后来自己也开始敲代码折腾，事实上，在 window 下一行代码就能产生一个无线热点：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netsh wlan <span class="built_in">set</span> myWiFi mode=allow ssid=YOUR_WiFi_NAME key=WiFi_PASSWORD</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">netsh wlan <span class="built_in">set</span> myWiFi mode=allow ssid=YOUR_WiFi_NAME key=WiFi_PASSWORD</div></pre></td></tr></table></figure>
 <p>上述命令会在系统的某个位置生成一个文件，其中 key 是明文保存的，然后通过如下命令就能开启 WiFi：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开启 WiFi</span></span><br><span class="line">net wlan start myWiFi </span><br><span class="line"><span class="comment"># 关闭 WiFi</span></span><br><span class="line">net wlan stop myWiFi</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 开启 WiFi</span></div><div class="line">net wlan start myWiFi </div><div class="line"><span class="comment"># 关闭 WiFi</span></div><div class="line">net wlan stop myWiFi</div></pre></td></tr></table></figure>
 <p>Linux 下稍微费劲些，配合 hostpd 和 dnsmasq，不过也是差不多几行代码的事情。</p>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>本文主要是对 WiFi 万能钥匙这个软件相关功能的一些猜测，具体如何实现，可以去网上观摩下骇客们对软件代码的反编译。</p>
 
@@ -299,6 +299,13 @@
 		
 		<ul>
 			<li>
+				<span><font aria-hidden="true">2016-11-19 »</font> </span>
+				<a href="/blog/2016/11/19/nginx-configuration-start/">Nginx 配置简述</a>
+				<span class="aria-readonly">发表时间为2016年11月19日</span>
+				<div><span class="aria-readonly">文章概要 </span>不论是本地开发，还是远程到 Server 开发，还是给提供 demo 给人看效果，我们时常需要对 Nginx 做配置，Nginx 的配置项相当多，如果考虑性能配置起来会比较麻烦。不过，我们往往只是需要一个静态 Server，或者一个反向代理 Server，这对 Nginx 来说小菜一碟。本文将给大家介绍 Nginx 配置的基本知识，不想细看的同学可以直接跳到最后一个例子。</div>
+			</li>
+			
+			<li>
 				<span><font aria-hidden="true">2016-08-25 »</font> </span>
 				<a href="/blog/2016/08/25/pac-file/">详解代理自动配置 PAC</a>
 				<span class="aria-readonly">发表时间为2016年08月25日</span>
@@ -319,16 +326,10 @@
 				<div><span class="aria-readonly">文章概要 </span>CA，Catificate Authority，它的作用就是提供证书（即服务器证书，由域名、公司信息、序列号和签名信息组成）加强服务端和客户端之间信息交互的安全性，以及证书运维相关服务。任何个体/组织都可以扮演 CA 的角色，只不过难以得到客户端的信任，能够受浏览器默认信任的 CA 大厂商有很多，其中 TOP5 是 Symantec、Comodo、Godaddy、GolbalSign 和 Digicert。</div>
 			</li>
 			
-			<li>
-				<span><font aria-hidden="true">2016-03-19 »</font> </span>
-				<a href="/blog/2016/03/19/problem-debugging/">对系统链路问题排查的一些看法</a>
-				<span class="aria-readonly">发表时间为2016年03月19日</span>
-				<div><span class="aria-readonly">文章概要 </span>页面上发现几个模块展示比较缓慢，白了大约 5s 之后展示兜底，显然，是接口请求超时了，打开控制台一看，果然，接口挂了。看了下相关页面，因为大量用到这个接口，模块也都加载超时了。换一台电脑看了下，存在一样的问题，确认是接口挂了。</div>
-			</li>
-			
 		</ul>
 	</div>
 </div>
+
 		<a href="/entry/" class="relative-to-comment-wrapper" tabindex="0" aria-hidden="true"><div class="relative-to-comment">回到首页</div></a>
 	</div>
 	<div class="friends-box">
