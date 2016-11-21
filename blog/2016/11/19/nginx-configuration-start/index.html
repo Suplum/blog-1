@@ -93,7 +93,7 @@
 <p>try_files 设置<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>.html <span class="variable">$uri</span>/index.html <span class="variable">@other</span>;</div><div class="line"><span class="attribute">location</span> <span class="variable">@other</span> &#123;</div><div class="line">    <span class="comment"># 尝试寻找匹配 uri 的文件，失败了就会转到上游处理</span></div><div class="line">    <span class="attribute">proxy_pass</span>  http://localhost:9000;</div><div class="line">&#125;</div><div class="line"><span class="attribute">location</span> / &#123;</div><div class="line">    <span class="comment"># 尝试寻找匹配 uri 的文件，没找到直接返回 502</span></div><div class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>.html =<span class="number">502</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="Nginx-配置反向代理服务器"><a href="#Nginx-配置反向代理服务器" class="headerlink" title="Nginx 配置反向代理服务器"></a>Nginx 配置反向代理服务器</h3><p>反向代理（reserve proxy）方式是指用代理服务器来接受 Internet 上的连接请求，然后将请求转发给内部网络中的上游服务器，并将上游服务器上得到的结果返回给 Internet 上请求连接的客户端，此时代理服务器对外的表现就是一个 Web 服务器。</p>
 <p>Nginx 具备超强的高并发高负载能力，一般会作为前端的服务器直接向客户端提供静态文件服务；而业务一般还包含一些业务逻辑需要 Apache、Tomcat 等服务器来处理，故通常 Nginx 对外表现即为静态 Web 服务器也是反向代理服务器。</p>
-<p>缺点是增加了一次请求的处理时间，优点是降低了上有服务器的负载，尽量将压力放在 Nginx 服务器上。</p>
+<p>缺点是增加了一次请求的处理时间，优点是降低了上游服务器的负载，尽量将压力放在 Nginx 服务器上。</p>
 <p><strong>1、负载均衡配置</strong></p>
 <p>upstream，定义一个上游服务器集群<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">upstream</span> backend &#123;</div><div class="line">    <span class="comment"># ip_hash;</span></div><div class="line">    <span class="attribute">server</span> s1.barretlee.com;</div><div class="line">    <span class="attribute">server</span> s2.barretlee.com;</div><div class="line">&#125;</div><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">proxy_pass</span> http://backend;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><strong>2、反向代理</strong></p>
@@ -141,7 +141,7 @@
 <a class="article-tag-link" href="/blog/tags/Nginx/">Nginx</a>
 </li>
 		<li>版权声明: 署名-非商业性使用-禁止演绎 3.0 国际（<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">CC BY-NC-ND 3.0</a>）</li>
-		<li>最后编辑时间: 2016-11-21 08:23:34</li>
+		<li>最后编辑时间: 2016-11-21 09:43:58</li>
 		<li>Feed订阅: <a href="/rss2.xml"><i class="icon">&#x25c8;</i></a></li>
 	</ul>
 	<a href="/about/"><img src="/blogimgs/avatar150.png" /></a>
