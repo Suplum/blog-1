@@ -6897,10 +6897,6 @@ span.line {
     display: block;
     float: none;
   }
-  .relative-article ul div {
-    border-left: none;
-    padding-left: 0;
-  }
 }
 @media screen and (max-width: 481px) {
   .copyright {
